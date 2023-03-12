@@ -1,17 +1,7 @@
 package com.Api.books.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.validation.constraints.Email;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
 
 @Entity
 //lombok is used to remove boiler code lik getter setter constructor
@@ -29,9 +19,10 @@ public class Books {
 //    @Positive
 
     private String book_name;
-    private String author_name;
-
-//
+    @OneToOne(targetEntity = Author.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "author_id",referencedColumnName = "id")
+//    @RestResource(path = "libraryAddress", rel="address")
+    private Author  author;
 
     public Long getBook_id() {
         return book_id;
@@ -49,11 +40,11 @@ public class Books {
         this.book_name = book_name;
     }
 
-    public String getAuthor_name() {
-        return author_name;
+    public Author getAuthor() {
+        return author;
     }
 
-    public void setAuthor_name(String author_name) {
-        this.author_name = author_name;
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 }
