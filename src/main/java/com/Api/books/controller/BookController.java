@@ -1,6 +1,7 @@
 package com.Api.books.controller;
 
 import com.Api.books.Error.BookError;
+import com.Api.books.model.Author;
 import com.Api.books.model.Books;
 import com.Api.books.service.BookService;
 import jakarta.validation.Valid;
@@ -15,8 +16,15 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
+//    @PostMapping("/addBook")
+//   public Books addBook(@Valid @RequestBody Books book,Long id){
+//        System.out.println(id);
+//        return bookService.saveBook(book,id);
+//    }
+
     @PostMapping("/addBook")
-   public Books addBook(@Valid @RequestBody Books book){
+    public Books addBook(@Valid @RequestBody Books book){
+//        System.out.println(id);
         return bookService.saveBook(book);
     }
 

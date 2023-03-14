@@ -1,13 +1,17 @@
 package com.Api.books.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 //This is used to create table name or is auto
 //@Table(name = "user")
 public class User {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 //    Is is for adding colum name or use declare name
 //    @Column(name="first_name")
@@ -17,11 +21,24 @@ public class User {
     private Long phone_number;
     private String email;
 
+//    @JsonIgnore
+    @ManyToMany(targetEntity = Books.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "book_id",referencedColumnName = "id")
+    private Set<Books> books =new HashSet<Books>();
+
     public void setId(Long id){
         this.id = id;
     }
     public Long getId (){
         return id;
+    }
+
+    public Set<Books> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Books> books) {
+        this.books = books;
     }
 
     public String getFirst_name() {

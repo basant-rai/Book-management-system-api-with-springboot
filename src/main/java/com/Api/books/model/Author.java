@@ -10,19 +10,19 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String author_name;
-    @OneToOne(mappedBy = "author")
-    private Books book;
-    private String published_date;
+//    @OneToOne(mappedBy = "author")
+//    private Books book;
 
+    @ManyToOne(targetEntity = Books.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "book_id",referencedColumnName = "book_id")
+    private Author  author;
 
     public Author() {
     }
 
-    public Author(Long id, String author_name, String published_date) {
+    public Author(Long id, String author_name) {
         this.id = id;
         this.author_name = author_name;
-//        this.book = book;
-        this.published_date = published_date;
     }
 
     public Long getId() {
@@ -49,11 +49,5 @@ public class Author {
 //        this.book = book;
 //    }
 
-    public String getPublished_date() {
-        return published_date;
-    }
 
-    public void setPublished_date(String published_date) {
-        this.published_date = published_date;
-    }
 }

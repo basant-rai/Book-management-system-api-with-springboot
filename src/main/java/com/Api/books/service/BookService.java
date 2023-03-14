@@ -6,7 +6,9 @@ import com.Api.books.model.Books;
 import java.util.List;
 
 public interface BookService {
+//   public Books saveBook(Books book,Long id);
    public Books saveBook(Books book);
+
    public List<Books> getAllBooks();
    public Books getBookById(Long book_id) throws BookError;
    public void deleteBook(Long book_id);
